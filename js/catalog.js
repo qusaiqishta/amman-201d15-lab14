@@ -1,5 +1,5 @@
 /* global Product, Cart */
-
+let counter=0;
 'use strict';
 
 // Set up an empty cart for use on this page.
@@ -14,8 +14,6 @@ function populateForm() {
   for (let i in Product.allProducts) {
     let oneitem=document.createElement('option');
     selectElement.appendChild(oneitem);
-    console.log(Product.allProducts[i].Product);
-    
     oneitem.textContent=Product.allProducts[i].name;
     oneitem.value=Product.allProducts[i].name;
     
@@ -37,6 +35,7 @@ function handleSubmit(event) {
   // TODO: Prevent the page from reloading
 
   // Do all the things ...
+  counter++;
   addSelectedItemToCart(event);
   cart.saveToLocalStorage();
   updateCounter();
@@ -60,10 +59,7 @@ function addSelectedItemToCart(event) {
 // TODO: Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() {
   let upper = document.getElementById('itemCount');
-  let counter=0;
-  for( let i=0;i<cart.items.length;i++){
-    counter=counter+cart.items[i].quantity;
-  }
+  
   upper.textContent=counter;
 }
 
